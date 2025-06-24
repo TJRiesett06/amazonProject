@@ -1,12 +1,14 @@
 /*JavaScript core steps to take:
 1. Save the data
-2.Generate the HTML
+2. Generate the HTML
 3. Make it interactive
 */
 
 //Step 1: Saving the data of each product into an array. The array is filled with objects. Each object represetns each product and their properties.
 //This is called a Data structure.
 //This consist of creating an array that hold each object. We then create each property we'll want for that object and make it consistent for each object.
+//The full array is being used in the products.js file
+/*
 const products = [{
   image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
   name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
@@ -31,11 +33,20 @@ const products = [{
     count: 56
   },
   priceCents: 799
+}, {
+  image: 'images/products/black-2-slot-toaster.jpg',
+  name: '2 Slot Toaster - Black',
+  rating: {
+    stars: 5,
+    count: 2197
+  },
+  priceCents: 1899
 }];
+*/
 
 let productsHTML = '';
 
-//Step 2: Generate the html using the data we had saved before.
+//Step 2: Generate the html using the data we had saved before. We want to generate html because its quicker to add another object then to add all the html.
 //This consist of looping through the data and for each object we create a template string with the html we want to generate and then input our objects properties into the certain <div> to render the data.
 //We want all this html to be one string so that we can render it, so we use the accumulator pattern which is where we create a variable outside the loop to initiate it.
 //we then set that variable equal to itself + the template string so that each generated html gets added to one string.
