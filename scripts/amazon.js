@@ -96,15 +96,59 @@ products.forEach((product)=>{
         Added
       </div>
 
-      <button class="add-to-cart-button button-primary">
+      <button class="add-to-cart-button button-primary js-add-to-cart"
+      data-product-id="${product.id}">
         Add to Cart
       </button>
     </div>
   `;
 });
+// Part of Step 3: above in the button class we are using a data attribute. THis is the same as any HTML attribute. Data attributes just have to start with "data-"
+//With this attribute we can set the product name on the button. We are using a template string to get the object product.name
 
-console.log(productsHTML);
 //after we combined the products into 1 string we want to go find the parent <div> for these products.
 //we give that parent <div> a new class name for js and now we want to generate the html we saved inside that <div>
 //so we do a simple innerHTML = productsHTML inorder to generate our html.
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+
+//Step 3 Start: making it interactive. 
+//We have to loop through all the buttons because the class is shared among all the add to cart buttons.
+//we then just use a event listener for the button element to listen for a click of a button.
+//we are going to want to push the property values to a cart.js script that will hold what is in out cart in the from of an array and object.
+//using the data attribute we will be able to get the existing objects properties and values for each button and push that to the cart.
+document.querySelectorAll('.js-add-to-cart')
+  .forEach((button)=>{
+    button.addEventListener('click', ()=>{
+      //This allows us to get all data attributes attatched to this button.
+      //after dataset we want to use dot notation to get this name "data-product-name"
+      //now what happens is we need to change it from Kabob case to Camel case meaning we remove the dash and make it one text string.
+      const productId = button.dataset.productId;
+
+      let matchingItem;
+
+      //we need to loop through each item and see if we have already added that item to the cart
+      cart.forEach((item)=>{
+        //check is the product name exist already
+        if(productId === item.productId){
+          //if it does exist it will set it equal to this variable
+          matchingItem = item;
+        }
+      });
+
+      //truthy value saying if mathicng item has a value then just add 1 to its quantity
+      if(matchingItem){
+        matchingItem.quantity += 1;
+      }else{
+        //else we push that new item to the cart
+        cart.push({
+          //creating new properties for the cart object
+          //for the new productName property we use the value that we got from the data attribute
+          productId: productId,
+          quantity: 1
+        });
+      }
+
+      console.log(cart);
+    });
+  })
