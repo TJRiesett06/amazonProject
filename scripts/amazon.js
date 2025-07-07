@@ -44,6 +44,12 @@ const products = [{
 }];
 */
 
+//This is a module. The imports always need to be at the top of the file.
+//Modules also only load if we use live server.
+//Here we are importing the variable cart from the cart.js file
+//you can give the variable you are importing an alias.
+import {cart as myCart} from '../data/cart.js';
+
 let productsHTML = '';
 
 //Step 2: Generate the html using the data we had saved before. We want to generate html because its quicker to add another object then to add all the html.
